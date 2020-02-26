@@ -11,6 +11,14 @@ const executableSchema = makeExecutableSchema({
 });
 
 const app = express();
+
+app.use('/graphql', graphql({
+  schema: executableSchema,
+  rootValue: resolvers,
+  context: { database },
+  graphiql: false,
+}));
+
 app.use('/graphiql', graphql({
   schema: executableSchema,
   rootValue: resolvers,
