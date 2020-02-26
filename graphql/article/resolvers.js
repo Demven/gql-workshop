@@ -1,23 +1,15 @@
 module.exports = {
-  article: (obj, args) => {
+  article: (obj, args, context) => {
     const { id } = args;
 
-    return {
-      id,
-      slug: `article-slug-${id}`,
-      headline: `Article Headline for ${id}`,
-      authors: () => ([
-        {
-          id: 'author-1',
-          name: 'Elon Musk',
-          email: 'elonmusk@tesla.com'
-        },
-        {
-          id: 'author-2',
-          name: 'Jeff Besos',
-          email: 'jeffbesos@amazon.com'
-        }
-      ]),
-    }
+    return context.database.getArticleById(id);
+  },
+
+  Article: {
+    authors: (obj, args, context) => {
+      const { id } = obj;
+
+      return context.database.getAuthorsByArticleId(id);
+    },
   },
 };
