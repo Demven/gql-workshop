@@ -1,21 +1,11 @@
-const { buildSchema } = require('graphql');
-// const Article = require('./article/schema');
+const Article = require('./article/schema');
+const Author = require('./author/schema');
 
-module.exports = buildSchema(`
+module.exports = `
   type Query {
     article(id: ID!): Article
   }
 
-  type Article {
-    id: ID!
-    slug: String
-    headline: String
-    authors: [Author]
-  }
-  
-  type Author {
-    id: ID!
-    name: String
-    email: String
-  }
-`);
+  ${Article}
+  ${Author}
+`;

@@ -1,12 +1,23 @@
 module.exports = {
   article: (obj, args) => {
-    console.info('obj', obj);
-    console.info('args', args);
+    const { id } = args;
 
     return {
-      id: 'SB123',
-      slug: 'article-slug-123',
-      headline: 'Article Headline'
-    };
-  }
+      id,
+      slug: `article-slug-${id}`,
+      headline: `Article Headline for ${id}`,
+      authors: () => ([
+        {
+          id: 'author-1',
+          name: 'Elon Musk',
+          email: 'elonmusk@tesla.com'
+        },
+        {
+          id: 'author-2',
+          name: 'Jeff Besos',
+          email: 'jeffbesos@amazon.com'
+        }
+      ]),
+    }
+  },
 };

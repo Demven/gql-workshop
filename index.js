@@ -1,11 +1,17 @@
 const express = require('express');
 const graphql = require('express-graphql');
-const schema = require('./graphql/schema');
+const { makeExecutableSchema } = require('graphql-tools');
+const typeDefs = require('./graphql/schema');
 const resolvers = require('./graphql/resolvers');
+
+const executableSchema = makeExecutableSchema({
+  typeDefs,
+  resolvers
+});
 
 const app = express();
 app.use('/graphiql', graphql({
-  schema,
+  schema: executableSchema,
   rootValue: resolvers,
   graphiql: true,
 }));
